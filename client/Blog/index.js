@@ -8,6 +8,7 @@ import './index.css';
 
 const cleanState = () => ({
   addOrUpdate: 'add',
+  author: '',
   title: '',
   body: '',
   editIndex: null
@@ -26,12 +27,14 @@ export default class Blog extends Component {
       [prop]: event.target.value
     });
   }
+  updateAuthor = this.updateState.bind(this, 'author');
   updateTitle = this.updateState.bind(this, 'title');
   updateBody = this.updateState.bind(this, 'body');
 
   editPost = (post, index) => {
     this.setState({
       addOrUpdate: 'update',
+      author: post.author,
       title: post.title,
       body: post.body,
       editIndex: index
@@ -52,6 +55,8 @@ export default class Blog extends Component {
     return (
       <ul className="blog-list">
         <AddPostForm
+          author={this.state.author}
+          authorChange={this.updateAuthor}
           title={this.state.title}
           titleChange={this.updateTitle}
           body={this.state.body}

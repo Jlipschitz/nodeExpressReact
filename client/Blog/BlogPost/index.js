@@ -2,22 +2,22 @@
 import React, { Component } from 'react';
 
 // Converts javascript date object to 2-digit slashes date format
-import prettyDate from '../../utils/prettyDate';
+import date from '../../utils/prettyDate';
 
 export default class BlogPost extends Component {
   delete = this.props.delete.bind(this, this.props.post._id);
   edit = this.props.edit.bind(this, this.props.post, this.props.index);
 
   componentWillMount() {
-    console.log('hello first', this.props.post.title);
+    console.log('hello first', this.props.post.author);
   }
 
   componentDidMount() {
-    console.log('hello', this.props.post.title);
+    console.log('hello', this.props.post.author);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('hello again first... really', nextProps.title);
+    console.log('hello again first... really', nextProps.author);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -25,23 +25,24 @@ export default class BlogPost extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('hello again first', this.props.post.title);
+    console.log('hello again first', this.props.post.author);
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('hello again', this.props.post.title);
+    console.log('hello again', this.props.post.author);
   }
 
   componentWillUnmount() {
-    console.log('goodbye', this.props.post.title);
+    console.log('goodbye', this.props.post.author);
   }
 
   render() {
     return (
       <li className="blog-post">
+      <h3 className="blog-title">{this.props.post.author}</h3>
         <h3 className="blog-title">{this.props.post.title}</h3>
         <p className="blog-body">{this.props.post.body}</p>
-        <p className="blog-created-date">{prettyDate(this.props.post.createdDate)}</p>
+        <p className="blog-created-date">{date.prettyDate(this.props.post.createdDate)}</p>
         {
           <div>
             <button className="delete-post" onClick={this.delete}>Delete Post</button>

@@ -3,17 +3,19 @@ import mongoose, { Schema } from 'mongoose';
 const PostSchema = Schema({
 
     // this property will hold blog post's title
+    author: {
+        type: String,
+        default: 'Author'
+    },
     title: {
         type: String,
         default: 'Title'
     },
-
     // this property will hold blog post's body
     body: {
         type: String,
         default: 'Body'
     },
-
     // this property will hold the date the blog post was created
     createdDate: {
         type: Date,

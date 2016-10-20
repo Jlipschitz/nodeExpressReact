@@ -1,6 +1,7 @@
 // Component here uses ES6 destructuring syntax in import, what is means is "retrieve the property 'Component' off of the object exported from the 'react'"
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import Date from './Date/index'
 
 import './index.css';
 
@@ -15,6 +16,7 @@ class Navbar extends Component {
   render() {
     return (
       <div className="example-react-app-nav">
+      <Date currentDate={this.props.currentDate}/>
         <img
           src={logo}
           className="example-react-app-logo"

@@ -12,7 +12,8 @@ import './App.css';
 
 class App extends Component {
   state = {
-    posts: []
+    posts: [],
+    date: Date.now()
   }
 
   componentDidMount() {
@@ -23,10 +24,18 @@ class App extends Component {
           posts: res.data.sort((a,b) => b.createdDate - a.createdDate) // sort posts newest to oldest
         })
       ).catch(err => console.log(err));
+      
+      //update the date once component has mounted
+      setInterval(() => {
+        this.setState({
+        date: Date.now()
+      })
+      }, 60000);
   }
 
   addPost = postState => {
     const postBody = {
+      author: postState.author,
       title: postState.title,
       body: postState.body
     };
@@ -44,6 +53,7 @@ class App extends Component {
     request.put({
       route: `/api/post/${this.state.posts[index]._id}`,
       body: {
+        author: postState.author,
         title: postState.title,
         body: postState.body,
         createdDate: new Date()
@@ -66,7 +76,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar 
+          currentDate={this.state.date}
+        />
         <Blog
           posts={this.state.posts}
           addPost={this.addPost}
